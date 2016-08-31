@@ -14,7 +14,7 @@ export class BoardPage extends React.Component {
         this.state = {
             notes: [{
                 id: uuid.v4(),
-                text: "",
+                text: "Your First Sticky!!",
                 editMode: false
             }]
         };
@@ -46,14 +46,22 @@ export class BoardPage extends React.Component {
     }
 
     render() {
+        const {notes} = this.state;
         return (
             <div className="board">
                 <NewNote createNote={this.addNote} />
-                    <Note note = {this.state.notes[0]}
-                        onSave={this.onSave}
-                        onEdit={this.onEdit}
-                        onRemove={this.onRemove}
-                        />
+                {notes.map(note => {
+                    return (
+                        <Note
+                            key = {note.id}
+                            note = {note}
+                            onSave={this.onSave}
+                            onEdit={this.onEdit}
+                            onRemove={this.onRemove}
+                            />
+                    );
+                }) }
+
             </div>
         );
     }
