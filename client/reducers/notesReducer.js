@@ -1,5 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 import initialState from "./initialState";
+import uuid from "uuid";
 
 export default function recipeReducer(state = initialState.notes, action) {
     switch (action.type) {
@@ -8,7 +9,7 @@ export default function recipeReducer(state = initialState.notes, action) {
                     return [
                         ...notes,
                         {...note,
-                        id: `${note.type.split(" ").join("-")}-${note.name}`.toLowerCase()} ];
+                        id: uuid.v4()} ];
             }, []);
         }
         case actionTypes.CREATE_NOTE_SUCCESS: {

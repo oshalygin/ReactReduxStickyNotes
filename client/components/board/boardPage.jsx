@@ -11,43 +11,31 @@ export class BoardPage extends React.Component {
         this.state = {
             notes: []
         };
+
+        // this.addNote = this.addNote.bind(null, this);
     }
 
     componentWillReceiveProps(newProps) {
         this.setState({ notes: newProps.notes });
     }
 
-    componentDidMount() {
-        this.setState({ //eslint-disable-line
-            recipes: this.props.notes
-        });
-    }
-
-    componentDidUpdate() {
-    }
-
     addNote(noteText) {
-        const { notes } = this.state;
-
-        // notes.push({
-        //     id: this.nextId(),
-        //     note: noteText
-        // });
-        this.setState({ notes: notes });
+        this.props.stickyNoteActions.createNote({ text: noteText });
     }
 
     render() {
         return (
             <div className="board">
-                <button className="btn btn-sm btn-success glyphicon glyphicon-plus"
-                    onClick={this.add.bind(null, "New Note") }/>
+                <button className="btn btn-sm btn-success glyphicon glyphicon-list-alt"
+                    onClick={this.addNote.bind(null, "Enter Note Text") }/>
             </div>
         );
     }
 }
 
 BoardPage.propTypes = {
-    notes: PropTypes.array.isRequired
+    notes: PropTypes.array.isRequired,
+    stickyNoteActions: PropTypes.object.isRequired
 };
 
 

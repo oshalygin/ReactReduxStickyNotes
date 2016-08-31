@@ -10,7 +10,7 @@ export function loadNotesSuccess(notes) {
 
 export function createdNoteSuccess(note) {
     return {
-        type: actionTypes.CREATE_COURSE_SUCCESS,
+        type: actionTypes.CREATE_NOTE_SUCCESS,
         note
     };
 }
@@ -44,7 +44,7 @@ export function updateNote(note) {
 export function createNote(note) {
     return function (dispatch) {
         const createdNote = Object.assign({}, note);
-        dispatch(createdNote(note));
+        dispatch(createdNoteSuccess(createdNote));
     };
 }
 
