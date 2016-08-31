@@ -3,21 +3,11 @@ import ReactDOM from "react-dom"; //eslint-disable-line no-unused-vars
 import Draggable from "react-draggable";
 import TextArea from "../common/textArea.jsx";
 
-function randomBetween(min, max) {
-    return (min + Math.ceil(Math.random() * max));
-}
-
-const noteStyle = {
-    right: randomBetween(0, window.innerWidth - 150) + "px",
-    top: randomBetween(0, window.innerHeight - 150) + "px",
-    transform: "rotate(" + randomBetween(-15, 15) + "deg)"
-};
-
 export function renderDisplay(note, onEdit, onRemove) {
     return (
         <Draggable>
             <div className="note"
-                style={noteStyle}>
+                style={note.position}>
                 <p>{note.text}</p>
                 <span>
                     <button onClick={() => onEdit(note.id) }
@@ -33,7 +23,7 @@ export function renderDisplay(note, onEdit, onRemove) {
 export function renderForm(note, onSave, onChange) {
     return (
         <Draggable>
-            <div className="note" style={noteStyle}>
+            <div className="note" style={note.position}>
                 <TextArea
                     id={note.id}
                     text={note.text}
