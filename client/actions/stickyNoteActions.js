@@ -22,6 +22,13 @@ export function updateNoteSuccess(note) {
     };
 }
 
+export function editingNoteSuccess(note) {
+    return {
+        type: actionTypes.EDITING_NOTE_SUCCESS,
+        note
+    };
+}
+
 export function loadNotes() {
     return function (dispatch) {
         return axios.get("/api/notes") //Future implementation
@@ -38,6 +45,15 @@ export function updateNote(note) {
     return function (dispatch) {
         const updatedNote = Object.assign({}, note);
         dispatch(updateNoteSuccess(updatedNote));
+    };
+}
+
+
+export function editingNote(note) {
+    return function (dispatch) {
+        let toggledNote = Object.assign({}, note);
+        toggledNote.editMode = true;
+        dispatch(editingNoteSuccess(toggledNote));
     };
 }
 

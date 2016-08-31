@@ -29,6 +29,12 @@ export class BoardPage extends React.Component {
         this.setState({ notes: newProps.notes });
     }
 
+    componentDidMount() {
+        this.setState({ //eslint-disable-line
+            notes: this.props.notes
+        });
+    }
+
     addNote(noteText) {
         this.props.stickyNoteActions.createNote({ text: noteText });
     }
@@ -37,8 +43,10 @@ export class BoardPage extends React.Component {
         console.log("onSave");
     }
 
-    onEdit() {
-        console.log("onEdit");
+    onEdit(noteId) {
+        const noteClicked = this.props.notes
+            .filter(note => note.id === noteId)[0];
+        this.props.stickyNoteActions.editingNote(Object.assign({}, noteClicked));
     }
 
     onRemove() {

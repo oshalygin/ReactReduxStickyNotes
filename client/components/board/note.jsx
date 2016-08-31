@@ -12,14 +12,14 @@ const noteStyle = {
     transform: "rotate(" + randomBetween(-15, 15) + "deg)"
 };
 
-export function renderDisplay(noteText, onEdit, onRemove) {
+export function renderDisplay(note, onEdit, onRemove) {
     return (
         <Draggable>
             <div className="note"
                 style={noteStyle}>
-                <p>{noteText}</p>
+                <p>{note.text}</p>
                 <span>
-                    <button onClick={onEdit}
+                    <button onClick={()=> onEdit(note.id)}
                         className="btn btn-primary glyphicon glyphicon-pencil"/>
                     <button onClick={onRemove}
                         className="btn btn-danger glyphicon glyphicon-trash"/>
@@ -33,9 +33,8 @@ export function renderForm(noteText, onSave) {
     return (
         <Draggable>
             <div className="note" style={noteStyle}>
-                <textarea ref="newText" defaultValue={noteText}
-                    className="form-control"></textarea>
-                <button onClick={onSave} className="btn btn-success btn-sm glyphicon glyphicon-floppy-disk" />
+
+                <button onClick={() => onSave()} className="btn btn-success btn-sm glyphicon glyphicon-floppy-disk" />
             </div>
         </Draggable>
     );
@@ -46,7 +45,7 @@ const Note = ({note, onSave, onEdit, onRemove}) => {
     if (!!note.editMode) {
         return renderForm(note.text, onSave);
     } else { //eslint-disable-line
-        return renderDisplay(note.text, onEdit, onRemove);
+        return renderDisplay(note, onEdit, onRemove);
     }
 };
 

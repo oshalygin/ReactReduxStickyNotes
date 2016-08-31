@@ -9,20 +9,22 @@ export default function recipeReducer(state = initialState.notes, action) {
                     return [
                         ...notes,
                         {...note,
-                        id: uuid.v4()} ];
+                        id: uuid.v4(),
+                        editMode: false } ];
             }, []);
         }
         case actionTypes.CREATE_NOTE_SUCCESS: {
             const createdNote = {
                 id: uuid.v4(),
-                text: action.note.text
-
+                text: action.note.text,
+                editMode: false
             };
             return [
                 ...state, Object.assign({}, createdNote)
             ];
         }
-        case actionTypes.UPDATE_NOTE_SUCCESS: {
+        case actionTypes.UPDATE_NOTE_SUCCESS:
+        case actionTypes.EDITING_NOTE_SUCCESS: {
                     let updatedNote = [...state];
                     let existingNoteIndex = updatedNote.findIndex(note => note.id === action.note.id);
                     updatedNote.splice(existingNoteIndex, 1, Object.assign({}, action.note));
