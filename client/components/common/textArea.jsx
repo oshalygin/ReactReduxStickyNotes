@@ -1,9 +1,10 @@
 import React, { PropTypes } from "react";
 
-const TextArea = ({text, onChange}) => {
+const TextArea = ({id, text, onChange}) => {
 
     return (
         <textarea className="form-control"
+            name={id}
             value={text}
             defaultValue={text}
             onChange={onChange}>

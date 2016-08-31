@@ -22,6 +22,7 @@ export class BoardPage extends React.Component {
         this.addNote = this.addNote.bind(this);
         this.onSave = this.onSave.bind(this);
         this.onEdit = this.onEdit.bind(this);
+        this.onNoteTextChange = this.onNoteTextChange.bind(this);
         this.onRemove = this.onRemove.bind(this);
     }
 
@@ -41,6 +42,20 @@ export class BoardPage extends React.Component {
 
     onSave() {
         console.log("onSave");
+    }
+
+    onNoteTextChange(event) {
+        const noteId = event.target.name;
+
+        let noteChanged = this.state.notes
+            .filter(note => note.id === noteId)[0];
+        noteChanged.text = event.target.value;
+
+        let updatedNote = [...this.state.notes];
+        let existingNoteIndex = updatedNote.findIndex(note => note.id === noteId);
+        updatedNote.splice(existingNoteIndex, 1, Object.assign({}, noteChanged));
+
+        return this.setState({ notes: [...updatedNote] });
     }
 
     onEdit(noteId) {
@@ -65,6 +80,7 @@ export class BoardPage extends React.Component {
                             note = {note}
                             onSave={this.onSave}
                             onEdit={this.onEdit}
+                            onChange={this.onNoteTextChange}
                             onRemove={this.onRemove}
                             />
                     );
