@@ -13,8 +13,13 @@ export default function recipeReducer(state = initialState.notes, action) {
             }, []);
         }
         case actionTypes.CREATE_NOTE_SUCCESS: {
+            const createdNote = {
+                id: uuid.v4(),
+                text: action.note.text
+
+            };
             return [
-                ...state, Object.assign({}, action.note)
+                ...state, Object.assign({}, createdNote)
             ];
         }
         case actionTypes.UPDATE_NOTE_SUCCESS: {

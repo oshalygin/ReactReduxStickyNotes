@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as stickyNoteActions from "../../actions/stickyNoteActions.js";
 
+import NewNote from "./newNote.jsx";
 
 export class BoardPage extends React.Component {
     constructor(props, context) {
@@ -12,7 +13,7 @@ export class BoardPage extends React.Component {
             notes: []
         };
 
-        // this.addNote = this.addNote.bind(null, this);
+        this.addNote = this.addNote.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
@@ -26,8 +27,7 @@ export class BoardPage extends React.Component {
     render() {
         return (
             <div className="board">
-                <button className="btn btn-sm btn-success glyphicon glyphicon-list-alt"
-                    onClick={this.addNote.bind(null, "Enter Note Text") }/>
+                <NewNote createNote={this.addNote} />
             </div>
         );
     }
