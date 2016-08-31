@@ -1,19 +1,28 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
+import uuid from "uuid";
 
 import { bindActionCreators } from "redux";
 import * as stickyNoteActions from "../../actions/stickyNoteActions.js";
 
 import NewNote from "./newNote.jsx";
+import Note from "./note.jsx";
 
 export class BoardPage extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            notes: []
+            notes: [{
+                id: uuid.v4(),
+                text: "",
+                editMode: false
+            }]
         };
 
         this.addNote = this.addNote.bind(this);
+        this.onSave = this.onSave.bind(this);
+        this.onEdit = this.onEdit.bind(this);
+        this.onRemove = this.onRemove.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
@@ -24,10 +33,27 @@ export class BoardPage extends React.Component {
         this.props.stickyNoteActions.createNote({ text: noteText });
     }
 
+    onSave() {
+        console.log("onSave");
+    }
+
+    onEdit() {
+        console.log("onEdit");
+    }
+
+    onRemove() {
+        console.log("onRemove");
+    }
+
     render() {
         return (
             <div className="board">
                 <NewNote createNote={this.addNote} />
+                    <Note note = {this.state.notes[0]}
+                        onSave={this.onSave}
+                        onEdit={this.onEdit}
+                        onRemove={this.onRemove}
+                        />
             </div>
         );
     }
