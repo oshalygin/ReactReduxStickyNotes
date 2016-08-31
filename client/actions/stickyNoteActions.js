@@ -43,7 +43,8 @@ export function loadNotes() {
 
 export function updateNote(note) {
     return function (dispatch) {
-        const updatedNote = Object.assign({}, note);
+        let updatedNote = Object.assign({}, note);
+        updatedNote.editMode = false;
         dispatch(updateNoteSuccess(updatedNote));
     };
 }

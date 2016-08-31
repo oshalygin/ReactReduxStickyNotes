@@ -2,7 +2,7 @@ import * as actionTypes from "../actions/actionTypes";
 import initialState from "./initialState";
 import uuid from "uuid";
 
-export default function recipeReducer(state = initialState.notes, action) {
+export default function noteReducer(state = initialState.notes, action) {
     switch (action.type) {
         case actionTypes.LOAD_NOTES_SUCCESS: {
                 return action.notes.reduce((notes, note) => {
@@ -12,6 +12,9 @@ export default function recipeReducer(state = initialState.notes, action) {
                         id: uuid.v4(),
                         editMode: false } ];
             }, []);
+        }
+        case actionTypes.UPDATE_NOTE_SUCCESS: {
+            return [...state];
         }
         case actionTypes.CREATE_NOTE_SUCCESS: {
             const createdNote = {
@@ -23,7 +26,7 @@ export default function recipeReducer(state = initialState.notes, action) {
                 ...state, Object.assign({}, createdNote)
             ];
         }
-        case actionTypes.UPDATE_NOTE_SUCCESS:
+
         case actionTypes.EDITING_NOTE_SUCCESS: {
                     let updatedNote = [...state];
                     let existingNoteIndex = updatedNote.findIndex(note => note.id === action.note.id);

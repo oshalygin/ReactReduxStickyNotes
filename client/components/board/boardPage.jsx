@@ -12,6 +12,7 @@ export class BoardPage extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
+            note: {},
             notes: [{
                 id: uuid.v4(),
                 text: "Your First Sticky!!",
@@ -40,22 +41,25 @@ export class BoardPage extends React.Component {
         this.props.stickyNoteActions.createNote({ text: noteText });
     }
 
-    onSave() {
-        console.log("onSave");
+    onSave(noteId) {
+        let updatedNote = this.props.notes
+            .filter(note => note.id === noteId)[0];
+        updatedNote.editMode = false;
+        this.props.stickyNoteActions.updateNote(Object.assign({}, updatedNote));
     }
 
     onNoteTextChange(event) {
         const noteId = event.target.name;
 
-        let noteChanged = this.state.notes
+        let changedNote = this.props.notes
             .filter(note => note.id === noteId)[0];
-        noteChanged.text = event.target.value;
+        changedNote.text = event.target.value;
 
-        let updatedNote = [...this.state.notes];
-        let existingNoteIndex = updatedNote.findIndex(note => note.id === noteId);
-        updatedNote.splice(existingNoteIndex, 1, Object.assign({}, noteChanged));
+        let updatedNotes = [...this.props.notes];
+        let existingNoteIndex = updatedNotes.findIndex(note => note.id === noteId);
+        updatedNotes.splice(existingNoteIndex, 1, Object.assign({}, changedNote));
 
-        return this.setState({ notes: [...updatedNote] });
+        return this.setState({ });
     }
 
     onEdit(noteId) {

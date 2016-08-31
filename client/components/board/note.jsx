@@ -35,10 +35,10 @@ export function renderForm(note, onSave, onChange) {
         <Draggable>
             <div className="note" style={noteStyle}>
                 <TextArea
-                    name={note.id}
+                    id={note.id}
                     text={note.text}
                     onChange={onChange} />
-                <button onClick={() => onSave() } className="btn btn-success btn-sm glyphicon glyphicon-floppy-disk" />
+                <button onClick={()=> onSave(note.id)} className="btn btn-success btn-sm glyphicon glyphicon-floppy-disk" />
             </div>
         </Draggable>
     );

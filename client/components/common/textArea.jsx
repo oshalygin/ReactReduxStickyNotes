@@ -6,13 +6,13 @@ const TextArea = ({id, text, onChange}) => {
         <textarea className="form-control"
             name={id}
             value={text}
-            defaultValue={text}
             onChange={onChange}>
         </textarea>
     );
 };
 
 TextArea.propTypes = {
+    id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     value: PropTypes.string
