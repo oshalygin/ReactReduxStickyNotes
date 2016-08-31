@@ -11,6 +11,11 @@ export default function recipeReducer(state = initialState.notes, action) {
                         id: `${note.type.split(" ").join("-")}-${note.name}`.toLowerCase()} ];
             }, []);
         }
+        case actionTypes.CREATE_NOTE_SUCCESS: {
+            return [
+                ...state, Object.assign({}, action.note)
+            ];
+        }
         case actionTypes.UPDATE_NOTE_SUCCESS: {
                     let updatedNote = [...state];
                     let existingNoteIndex = updatedNote.findIndex(note => note.id === action.note.id);

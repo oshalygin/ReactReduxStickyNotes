@@ -18,26 +18,29 @@ export class BoardPage extends React.Component {
     }
 
     componentDidMount() {
-        componentHandler.upgradeDom(); //eslint-disable-line
         this.setState({ //eslint-disable-line
             recipes: this.props.notes
         });
     }
 
     componentDidUpdate() {
-        componentHandler.upgradeDom(); //eslint-disable-line
+    }
+
+    addNote(noteText) {
+        const { notes } = this.state;
+
+        // notes.push({
+        //     id: this.nextId(),
+        //     note: noteText
+        // });
+        this.setState({ notes: notes });
     }
 
     render() {
         return (
-            <div className="content-grid mdl-grid">
-                <div className="mdl-layout-spacer"></div>
-                <div className="mdl-cell mdl-cell--6-col">
-                    <div className="mdl-typography--text-center">
-                    <p>Sticky Note Application</p>
-                    </div>
-                </div>
-                <div className="mdl-layout-spacer"></div>
+            <div className="board">
+                <button className="btn btn-sm btn-success glyphicon glyphicon-plus"
+                    onClick={this.add.bind(null, "New Note") }/>
             </div>
         );
     }
@@ -51,7 +54,7 @@ BoardPage.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        notes: state.notes,
+        notes: state.notes
     };
 }
 
