@@ -3,22 +3,35 @@ import ReactDOM from "react-dom"; //eslint-disable-line no-unused-vars
 import Draggable from "react-draggable";
 import TextArea from "../common/textArea.jsx";
 
-import DraggableNote from "./draggableNote.jsx";
-
-export function renderDisplay(note, onEdit, onRemove) {
+export function renderDisplay(note, onEdit, onRemove, onExpand) {
 
     return (
         <Draggable>
             <div className="note-container">
                 <div className="note"
-                    style={note.position}>
-                    <p>{note.text}</p>
-                    <span>
-                        <button onClick={() => onEdit(note.id) }
-                            className="btn btn-primary glyphicon glyphicon-pencil"/>
-                        <button onClick={onRemove}
-                            className="btn btn-danger glyphicon glyphicon-trash"/>
-                    </span>
+                    style={Object.assign({}, note.position) }>
+                    <div className="front">
+                        <p>{note.text}</p>
+                        <span>
+                            <button onClick={() => onExpand(note.id) }
+                                className="btn btn-warning glyphicon glyphicon-resize-full"/>
+                            <button onClick={() => onEdit(note.id) }
+                                className="btn btn-primary glyphicon glyphicon-pencil"/>
+                            <button onClick={onRemove}
+                                className="btn btn-danger glyphicon glyphicon-trash"/>
+                        </span>
+                    </div>
+                    <div className="back">
+                        <p>{note.text}</p>
+                        <span>
+                            <button onClick={() => onExpand(note.id) }
+                                className="btn btn-warning glyphicon glyphicon-resize-full"/>
+                            <button onClick={() => onEdit(note.id) }
+                                className="btn btn-primary glyphicon glyphicon-pencil"/>
+                            <button onClick={onRemove}
+                                className="btn btn-danger glyphicon glyphicon-trash"/>
+                        </span>
+                    </div>
                 </div>
             </div>
         </Draggable>
@@ -42,11 +55,11 @@ export function renderForm(note, onSave, onChange) {
 }
 
 
-const Note = ({note, onSave, onEdit, onRemove, onChange, onMove}) => {
+const Note = ({note, onSave, onEdit, onRemove, onChange, onExpand}) => {
     if (!!note.editMode) {
-        return renderForm(note, onSave, onChange, onMove);
+        return renderForm(note, onSave, onChange);
     } else { //eslint-disable-line
-        return renderDisplay(note, onEdit, onRemove);
+        return renderDisplay(note, onEdit, onRemove, onExpand);
     }
 };
 

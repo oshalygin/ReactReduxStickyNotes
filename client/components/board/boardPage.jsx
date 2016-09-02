@@ -25,7 +25,7 @@ export class BoardPage extends React.Component {
         this.onEdit = this.onEdit.bind(this);
         this.onNoteTextChange = this.onNoteTextChange.bind(this);
         this.onRemove = this.onRemove.bind(this);
-        this.onMove = this.onMove.bind(this);
+        this.onExpand = this.onExpand.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
@@ -69,8 +69,30 @@ export class BoardPage extends React.Component {
         this.props.stickyNoteActions.editingNote(Object.assign({}, noteClicked));
     }
 
-    onMove(element) {
-        this.setState({ element });
+    onExpand(noteId) {
+
+        //This needs a lot of work....
+        event.preventDefault();
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+
+        let flippedNote = this.props.notes
+            .filter(note => note.id === noteId)[0];
+        flippedNote.position.transition = "1.0s";
+        flippedNote.position.transformStyle = "preserve-3d";
+        flippedNote.position.backgroundColor = "#3498db";
+        flippedNote.position.color = "white";
+        flippedNote.position.width = "300px";
+        flippedNote.position.height = "300px";
+
+        // flippedNote.position.paddingLeft = "-150px";
+        flippedNote.position.position = "absolute";
+        flippedNote.position.left = `-${windowWidth / 2}px`;
+        flippedNote.position.top = `-${windowHeight / 2}px`;
+        // flippedNote.position.transform = "translate(-50%, -50%) rotateY(180deg)";
+
+
+        this.setState({});
     }
 
     onRemove() {
@@ -91,7 +113,7 @@ export class BoardPage extends React.Component {
                             onEdit={this.onEdit}
                             onChange={this.onNoteTextChange}
                             onRemove={this.onRemove}
-                            onMove={this.onMove}
+                            onExpand={this.onExpand}
                             />
                     );
                 }) }

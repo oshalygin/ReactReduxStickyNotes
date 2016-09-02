@@ -1,5 +1,4 @@
 @import url(http://fonts.googleapis.com/css?family=Shadows+Into+Light);
-
 body,
 html,
 div.board,
@@ -23,8 +22,7 @@ div.board {
     background: -o-radial-gradient(center, ellipse cover, #eab92d 57%, #c79810 99%);
     background: -ms-radial-gradient(center, ellipse cover, #eab92d 57%, #c79810 99%);
     background: radial-gradient(ellipse at center, #eab92d 57%, #c79810 99%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eab92d', endColorstr='#c79810', GradientType=1);
-
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#eab92d', endColorstr='#c79810', GradientType=1);
 }
 
 div.note-container {
@@ -54,11 +52,30 @@ div.note p {
     font-family: "Shadows Into Light", Arial;
 }
 
-div.note:hover > span {
+.back,
+.front {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.back {
+    background-color: blue;
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+
+}
+
+div.note div.back p {
+    font-size: 30px;
+    padding: 5px;
+    font-family: "Shadows Into Light", Arial;
+}
+
+div.note:hover> span {
     opacity: 1;
 }
 
-div.note > span {
+div.note> span {
     position: absolute;
     bottom: 2px;
     right: 2px;
@@ -70,7 +87,7 @@ div.note button {
     margin: 2px;
 }
 
-div.note > textarea {
+div.note> textarea {
     height: 75%;
     background: rgba(255, 255, 255, .5);
 }
@@ -83,6 +100,6 @@ div.note > textarea {
 
 .flip {
     transition: 0.6s !important;
-	transform-style: preserve-3d !important;
+    transform-style: preserve-3d !important;
     transform: translate(-50%, -50%) rotateY(360deg) !important;
 }
