@@ -25,6 +25,7 @@ export class BoardPage extends React.Component {
         this.onEdit = this.onEdit.bind(this);
         this.onNoteTextChange = this.onNoteTextChange.bind(this);
         this.onRemove = this.onRemove.bind(this);
+        this.onMove = this.onMove.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
@@ -59,13 +60,17 @@ export class BoardPage extends React.Component {
         let existingNoteIndex = updatedNotes.findIndex(note => note.id === noteId);
         updatedNotes.splice(existingNoteIndex, 1, Object.assign({}, changedNote));
 
-        return this.setState({ });
+        return this.setState({});
     }
 
     onEdit(noteId) {
         const noteClicked = this.props.notes
             .filter(note => note.id === noteId)[0];
         this.props.stickyNoteActions.editingNote(Object.assign({}, noteClicked));
+    }
+
+    onMove(element) {
+        this.setState({ element });
     }
 
     onRemove() {
@@ -86,6 +91,7 @@ export class BoardPage extends React.Component {
                             onEdit={this.onEdit}
                             onChange={this.onNoteTextChange}
                             onRemove={this.onRemove}
+                            onMove={this.onMove}
                             />
                     );
                 }) }
