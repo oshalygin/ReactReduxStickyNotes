@@ -4,7 +4,6 @@ import Draggable from "react-draggable";
 import TextArea from "../common/textArea.jsx";
 
 export function renderDisplay(note, onEdit, onRemove, onExpand) {
-
     return (
         <Draggable>
             <div className="note-container">
@@ -49,7 +48,6 @@ export function renderForm(note, onSave, onChange) {
                         onChange={onChange} />
                     <button onClick={() => onSave(note.id) } className="btn btn-success btn-sm glyphicon glyphicon-floppy-disk" />
                 </div>
-            </div>
         </Draggable>
     );
 }
@@ -68,7 +66,8 @@ Note.propTypes = {
     onSave: PropTypes.func.isRequired,
     onEdit: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    onRemove: PropTypes.func.isRequired
+    onRemove: PropTypes.func.isRequired,
+    onExpand: PropTypes.func.isRequired
 };
 
 export default Note;

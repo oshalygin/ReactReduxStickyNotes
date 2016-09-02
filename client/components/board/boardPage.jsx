@@ -7,6 +7,7 @@ import * as stickyNoteActions from "../../actions/stickyNoteActions.js";
 
 import NewNote from "./newNote.jsx";
 import Note from "./note.jsx";
+import CenterNote from "./centerNote.jsx";
 
 export class BoardPage extends React.Component {
     constructor(props, context) {
@@ -17,7 +18,16 @@ export class BoardPage extends React.Component {
                 id: uuid.v4(),
                 text: "Your First Sticky!!",
                 editMode: false
-            }]
+            }],
+            centerNote: {
+                style: {
+                    backgroundColor: "blue",
+                    top: "50%",
+                    left: "50%",
+                    width: "500px",
+                    height: "500px"
+                }
+            }
         };
 
         this.addNote = this.addNote.bind(this);
@@ -34,7 +44,16 @@ export class BoardPage extends React.Component {
 
     componentDidMount() {
         this.setState({ //eslint-disable-line
-            notes: this.props.notes
+            notes: this.props.notes,
+            centerNote: {
+                style: {
+                    backgroundColor: "blue",
+                    top: "50%",
+                    left: "50%",
+                    width: "500px",
+                    height: "500px"
+                }
+            }
         });
     }
 
@@ -99,11 +118,31 @@ export class BoardPage extends React.Component {
         console.log("onRemove");
     }
 
+    onExpand(note) {
+        note.position = {...note.position,
+            transform: "translate(-50%, -50%) rotateY(180deg)",
+            top: "50%",
+            left: "50%",
+            transition: "1s",
+            transformStyle: "preserve-3d",
+            visibility: "hidden"
+        };
+
+        let centerNote = this.state.centerNote;
+        console.log(centerNote);
+        centerNote.text = note.text;
+        centerNote.id = note.id;
+        centerNote.style.visibility = "visible";
+
+        return this.setState({ centerNote: centerNote });
+    }
+
     render() {
-        const {notes} = this.state;
+        const {notes, centerNote} = this.state;
         return (
             <div className="board">
                 <NewNote createNote={this.addNote} />
+                <CenterNote note={centerNote} />
                 {notes.map(note => {
                     return (
                         <Note
