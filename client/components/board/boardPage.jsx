@@ -7,7 +7,6 @@ import * as stickyNoteActions from "../../actions/stickyNoteActions.js";
 
 import NewNote from "./newNote.jsx";
 import Note from "./note.jsx";
-import CenterNote from "./centerNote.jsx";
 
 export class BoardPage extends React.Component {
     constructor(props, context) {
@@ -18,16 +17,8 @@ export class BoardPage extends React.Component {
                 id: uuid.v4(),
                 text: "Your First Sticky!!",
                 editMode: false
-            }],
-            centerNote: {
-                style: {
-                    backgroundColor: "blue",
-                    top: "50%",
-                    left: "50%",
-                    width: "500px",
-                    height: "500px"
-                }
-            }
+            }]
+
         };
 
         this.addNote = this.addNote.bind(this);
@@ -92,8 +83,6 @@ export class BoardPage extends React.Component {
 
         //This needs a lot of work....
         event.preventDefault();
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
 
         let flippedNote = this.props.notes
             .filter(note => note.id === noteId)[0];
@@ -104,12 +93,10 @@ export class BoardPage extends React.Component {
         flippedNote.position.width = "300px";
         flippedNote.position.height = "300px";
 
-        // flippedNote.position.paddingLeft = "-150px";
         flippedNote.position.position = "absolute";
-        flippedNote.position.left = `-${windowWidth / 2}px`;
-        flippedNote.position.top = `-${windowHeight / 2}px`;
+        flippedNote.position.right = `-${flippedNote.position.width / 2}px`;
+        flippedNote.position.top = `-${flippedNote.position.height / 2}px`;
         // flippedNote.position.transform = "translate(-50%, -50%) rotateY(180deg)";
-
 
         this.setState({});
     }
@@ -118,31 +105,11 @@ export class BoardPage extends React.Component {
         console.log("onRemove");
     }
 
-    onExpand(note) {
-        note.position = {...note.position,
-            transform: "translate(-50%, -50%) rotateY(180deg)",
-            top: "50%",
-            left: "50%",
-            transition: "1s",
-            transformStyle: "preserve-3d",
-            visibility: "hidden"
-        };
-
-        let centerNote = this.state.centerNote;
-        console.log(centerNote);
-        centerNote.text = note.text;
-        centerNote.id = note.id;
-        centerNote.style.visibility = "visible";
-
-        return this.setState({ centerNote: centerNote });
-    }
-
     render() {
-        const {notes, centerNote} = this.state;
+        const {notes} = this.state;
         return (
             <div className="board">
                 <NewNote createNote={this.addNote} />
-                <CenterNote note={centerNote} />
                 {notes.map(note => {
                     return (
                         <Note

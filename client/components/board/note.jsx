@@ -9,28 +9,15 @@ export function renderDisplay(note, onEdit, onRemove, onExpand) {
             <div className="note-container">
                 <div className="note"
                     style={Object.assign({}, note.position) }>
-                    <div className="front">
-                        <p>{note.text}</p>
-                        <span>
-                            <button onClick={() => onExpand(note.id) }
-                                className="btn btn-warning glyphicon glyphicon-resize-full"/>
-                            <button onClick={() => onEdit(note.id) }
-                                className="btn btn-primary glyphicon glyphicon-pencil"/>
-                            <button onClick={onRemove}
-                                className="btn btn-danger glyphicon glyphicon-trash"/>
-                        </span>
-                    </div>
-                    <div className="back">
-                        <p>{note.text}</p>
-                        <span>
-                            <button onClick={() => onExpand(note.id) }
-                                className="btn btn-warning glyphicon glyphicon-resize-full"/>
-                            <button onClick={() => onEdit(note.id) }
-                                className="btn btn-primary glyphicon glyphicon-pencil"/>
-                            <button onClick={onRemove}
-                                className="btn btn-danger glyphicon glyphicon-trash"/>
-                        </span>
-                    </div>
+                    <p>{note.text}</p>
+                    <span>
+                        <button onClick={() => onExpand(note.id) }
+                            className="btn btn-warning glyphicon glyphicon-resize-full"/>
+                        <button onClick={() => onEdit(note.id) }
+                            className="btn btn-primary glyphicon glyphicon-pencil"/>
+                        <button onClick={onRemove}
+                            className="btn btn-danger glyphicon glyphicon-trash"/>
+                    </span>
                 </div>
             </div>
         </Draggable>
@@ -40,14 +27,13 @@ export function renderDisplay(note, onEdit, onRemove, onExpand) {
 export function renderForm(note, onSave, onChange) {
     return (
         <Draggable>
-            <div className="note-container">
-                <div className="note" style={note.position}>
-                    <TextArea
-                        id={note.id}
-                        text={note.text}
-                        onChange={onChange} />
-                    <button onClick={() => onSave(note.id) } className="btn btn-success btn-sm glyphicon glyphicon-floppy-disk" />
-                </div>
+            <div className="note" style={note.position}>
+                <TextArea
+                    id={note.id}
+                    text={note.text}
+                    onChange={onChange} />
+                <button onClick={() => onSave(note.id) } className="btn btn-success btn-sm glyphicon glyphicon-floppy-disk" />
+            </div>
         </Draggable>
     );
 }

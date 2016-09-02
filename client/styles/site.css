@@ -52,19 +52,6 @@ div.note p {
     font-family: "Shadows Into Light", Arial;
 }
 
-.back,
-.front {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-
-.back {
-    background-color: blue;
-    -webkit-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-
-}
-
 div.note div.back p {
     font-size: 30px;
     padding: 5px;
