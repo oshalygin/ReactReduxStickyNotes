@@ -92,10 +92,19 @@ export class BoardPage extends React.Component {
         flippedNote.position.color = "white";
         flippedNote.position.width = "300px";
         flippedNote.position.height = "300px";
-
         flippedNote.position.position = "absolute";
-        flippedNote.position.right = `-${flippedNote.position.width / 2}px`;
-        flippedNote.position.top = `-${flippedNote.position.height / 2}px`;
+        flippedNote.position.right = "100%";
+        flippedNote.position.top = "55%";
+
+
+        flippedNote.centered = {
+            position: "relative",
+            right: "55px",
+            top: "55%",
+            centered: true
+        };
+
+
         // flippedNote.position.transform = "translate(-50%, -50%) rotateY(180deg)";
 
         this.setState({});
