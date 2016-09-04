@@ -93,15 +93,14 @@ export class BoardPage extends React.Component {
         flippedNote.position.width = "300px";
         flippedNote.position.height = "300px";
         flippedNote.position.position = "absolute";
-        flippedNote.position.right = "100%";
-        flippedNote.position.top = "55%";
+        flippedNote.position.left = "50%";
+        flippedNote.position.top = "50%";
 
 
         flippedNote.centered = {
-            position: "relative",
-            right: "55px",
-            top: "55%",
-            centered: true
+            position: "absolute",
+            left: "50%",
+            top: "50%"
         };
 
 

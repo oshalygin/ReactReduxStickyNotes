@@ -6,7 +6,7 @@ import TextArea from "../common/textArea.jsx";
 export function renderDisplay(note, onEdit, onRemove, onExpand) {
     return (
         <Draggable>
-            <div className="note-container">
+            <div className="note-container" style={note.centered}>
                 <div className="note"
                     style={Object.assign({}, note.position) }>
                     <p>{note.text}</p>
