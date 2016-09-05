@@ -59,8 +59,8 @@ class Note extends React.Component {
     }
 
     moveToCenter(noteId) {
-        this.props.onExpand(noteId);
-        console.log(ReactDOM.findDOMNode(this).firstChild.getBoundingClientRect());
+        const position = ReactDOM.findDOMNode(this).firstChild.getBoundingClientRect();
+        this.props.onExpand(noteId, position);
     }
 
     render() {
@@ -81,20 +81,5 @@ Note.propTypes = {
     onRemove: PropTypes.func.isRequired,
     onExpand: PropTypes.func.isRequired
 };
-
-
-// function mapStateToProps(state) {
-//     return {
-//         // notes: state.notes
-//     };
-// }
-
-// function mapDispatchToProps(dispatch) {
-//     return {
-//         // stickyNoteActions: bindActionCreators(stickyNoteActions, dispatch)
-//     };
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Note);
 
 export default Note;

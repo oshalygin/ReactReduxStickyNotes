@@ -28,6 +28,7 @@ export class BoardPage extends React.Component {
         this.onNoteTextChange = this.onNoteTextChange.bind(this);
         this.onRemove = this.onRemove.bind(this);
         this.onExpand = this.onExpand.bind(this);
+        this.getCenterCoordinates = this.getCenterCoordinates.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
@@ -80,42 +81,41 @@ export class BoardPage extends React.Component {
         this.props.stickyNoteActions.editingNote(Object.assign({}, noteClicked));
     }
 
-    onExpand(noteId) {
+    getCenterCoordinates(boxWidth, currentNotePosition) {
+
+        const leftTarget = window.innerWidth / 2;
+        const topTarget = window.innerHeight / 2;
+        const boxOffset = boxWidth.replace("px", "") / 2;
+
+        const xTarget = leftTarget - currentNotePosition.left - boxOffset;
+        const yTarget = topTarget - currentNotePosition.top - boxOffset;
+
+        return {
+            x: xTarget,
+            y: yTarget
+        };
+    }
+
+    onExpand(noteId, currentNotePosition) {
 
         //This needs a lot of work....
         event.preventDefault();
-
+        console.log(currentNotePosition);
         let flippedNote = this.props.notes
             .filter(note => note.id === noteId)[0];
-
-        let documentWidth = window.innerWidth / 2;
-        let documentHeight = window.innerHeight / 2;
-        // let width = flippedNote.position.
-
-        // console.log(flippedNote.position);
-        // console.log(documentWidth);
-        // console.log(documentHeight);
-
-        // flippedNote.position.right = "50%";
-        // flippedNote.position.left = "50%";
-        // flippedNote.position.width = "50%";
-
-
-
-        // console.log(ReactDOM.findDOMNode(this).clientLeft);
 
         flippedNote.position.transition = "all 1.0s ease";
         flippedNote.position.transformStyle = "preserve-3d";
         flippedNote.position.backgroundColor = "#3498db";
         flippedNote.position.color = "white";
-        // flippedNote.position.width = "300px";
-        // flippedNote.position.height = "300px";
+        flippedNote.position.width = "300px";
+        flippedNote.position.height = "300px";
         flippedNote.position.position = "relative";
         // flippedNote.position.left = "-500px";
         // flippedNote.position.transform = "transition(-50%, -50%)";
         // flippedNote.position.top = "50%";
         // flippedNote.position.left = "50%";
-
+        const translatedCoordinates = this.getCenterCoordinates(flippedNote.position.width, currentNotePosition);
 
         // flippedNote.centered = {
         //     position: "absolute",
@@ -124,7 +124,7 @@ export class BoardPage extends React.Component {
         // };
 
 
-        flippedNote.position.transform = "translate(400px, 300px) rotateY(180deg)";
+        flippedNote.position.transform = `translate(${translatedCoordinates.x}px, ${translatedCoordinates.y}px) rotateY(180deg)`;
 
         this.setState({});
     }
