@@ -79,8 +79,13 @@ class Note extends React.Component {
         // return this.setState({});
     }
 
+    getPosition() {
+        console.log(ReactDOM.findDOMNode(this).firstChild.getBoundingClientRect());
+    }
+
     moveToCenter(noteId) {
         const position = ReactDOM.findDOMNode(this).firstChild.getBoundingClientRect();
+        console.log(position);
         this.props.onExpand(noteId, position);
     }
 

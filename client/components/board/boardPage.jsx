@@ -84,12 +84,16 @@ export class BoardPage extends React.Component {
 
     getCoordinateTarget(target, offset, currentNotePosition) {
 
-        const xTarget = target.left - currentNotePosition.left - offset.x;
-        const yTarget = target.top - currentNotePosition.top - offset.y;
+        const xDifference = target.left - currentNotePosition.left;
+        const yDifference = target.top - currentNotePosition.top;
+        const xTarget = xDifference > 0 ? xDifference - offset.x : -Math.abs(xDifference) - offset.x;
+        const yTarget = yDifference > 0 ? yDifference - offset.y : -Math.abs(yDifference) - offset.y;
+        // const xTarget = target.left - currentNotePosition.left - offset.x;
+        // const yTarget = target.top - currentNotePosition.top - offset.y;
 
         return {
-            x: xTarget,
-            y: yTarget
+            y: yTarget,
+            x: xTarget
         };
     }
 
@@ -117,21 +121,17 @@ export class BoardPage extends React.Component {
                 y: 150
             };
             const translatedCoordinates = this.getCoordinateTarget(centerOfWindow, offset, currentNotePosition);
-
             note.position.transform = `translate(${translatedCoordinates.x}px, ${translatedCoordinates.y}px) rotateY(180deg)`;
 
             note.originalPosition = {
                 left: currentNotePosition.left,
-                top: currentNotePosition.top
+                top: currentNotePosition.top,
+                movement: translatedCoordinates
             };
-            console.log(note.originalPosition);
+            console.log(currentNotePosition);
 
             note.centered = true;
         } else {
-            // const target = {
-            //     left: note.originalPosition.left,
-            //     top: note.originalPosition.top
-            // };
 
             note.position.transition = "all 1s";
             note.position.transformStyle = "preserve-3d";
@@ -141,20 +141,17 @@ export class BoardPage extends React.Component {
             note.position.height = "150px";
             note.position.position = "relative";
             const offset = {
-                x: 35,
-                y: 35
+                x: 150,
+                y: 150
             };
-            console.log("original:", centerOfWindow);
-            console.log("target:", note.originalPosition);
-            const translatedCoordinates = this.getCoordinateTarget(note.originalPosition, offset, centerOfWindow);
+
+            const translatedCoordinates = this.getCoordinateTarget(note.originalPosition, offset, currentNotePosition);
+
             console.log("movement:", translatedCoordinates);
-            // console.log(target);
             note.position.transform = `translate(${translatedCoordinates.x}px, ${translatedCoordinates.y}px)`;
             note.centered = false;
         }
-        // this.setState({});
-        // setTimeout(() => null, 1000);
-        // flippedNote.position.transform = `rotateY(135deg)`;
+
         this.setState({});
 
     }
