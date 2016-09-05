@@ -11,6 +11,8 @@ body {
     margin: 0;
     padding: 0;
 }
+
+
 /*
 div.board {
     background-color: brown;
@@ -37,6 +39,7 @@ div.note {
     background-color: yellow;
     margin: 2px auto;
     position: relative;
+    perspective: 800px;
     cursor: -webkit-grab;
     -webkit-box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2);
     box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2);
@@ -49,12 +52,22 @@ div.note:active {
 div.note p {
     font-size: 22px;
     padding: 5px;
+
     font-family: "Shadows Into Light", Arial;
 }
 
-div.note div.back p {
+div p.note-back {
     font-size: 30px;
     padding: 5px;
+    color: #ffffff;
+    background-color: #3498db;
+    font-family: "Shadows Into Light", Arial;
+}
+
+div p.note-front {
+    font-size: 30px;
+    padding: 5px;
+
     font-family: "Shadows Into Light", Arial;
 }
 
@@ -83,10 +96,4 @@ div.note> textarea {
     position: fixed;
     top: 10px;
     right: 10px;
-}
-
-.flip {
-    transition: 0.6s !important;
-    transform-style: preserve-3d !important;
-    transform: translate(-50%, -50%) rotateY(360deg) !important;
 }

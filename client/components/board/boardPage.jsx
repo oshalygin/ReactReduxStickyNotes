@@ -1,5 +1,4 @@
 import React, { PropTypes } from "react";
-import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import uuid from "uuid";
 
@@ -28,7 +27,7 @@ export class BoardPage extends React.Component {
         this.onNoteTextChange = this.onNoteTextChange.bind(this);
         this.onRemove = this.onRemove.bind(this);
         this.onExpand = this.onExpand.bind(this);
-        this.getCenterCoordinates = this.getCenterCoordinates.bind(this);
+        this.getCoordinateTarget = this.getCoordinateTarget.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
@@ -55,6 +54,7 @@ export class BoardPage extends React.Component {
     }
 
     onSave(noteId) {
+        console.log("saved");
         let updatedNote = this.props.notes
             .filter(note => note.id === noteId)[0];
         updatedNote.editMode = false;
@@ -62,6 +62,7 @@ export class BoardPage extends React.Component {
     }
 
     onNoteTextChange(event) {
+        console.log("onNoteTextChange");
         const noteId = event.target.name;
 
         let changedNote = this.props.notes
@@ -81,14 +82,10 @@ export class BoardPage extends React.Component {
         this.props.stickyNoteActions.editingNote(Object.assign({}, noteClicked));
     }
 
-    getCenterCoordinates(boxWidth, currentNotePosition) {
+    getCoordinateTarget(target, offset, currentNotePosition) {
 
-        const leftTarget = window.innerWidth / 2;
-        const topTarget = window.innerHeight / 2;
-        const boxOffset = boxWidth.replace("px", "") / 2;
-
-        const xTarget = leftTarget - currentNotePosition.left - boxOffset;
-        const yTarget = topTarget - currentNotePosition.top - boxOffset;
+        const xTarget = target.left - currentNotePosition.left - offset.x;
+        const yTarget = target.top - currentNotePosition.top - offset.y;
 
         return {
             x: xTarget,
@@ -99,26 +96,67 @@ export class BoardPage extends React.Component {
     onExpand(noteId, currentNotePosition) {
 
         event.preventDefault();
-        let flippedNote = this.props.notes
-            .filter(note => note.id === noteId)[0];
+        let note = this.props.notes
+            .filter(specificNote => specificNote.id === noteId)[0];
 
-        flippedNote.position.transition = "all 1.0s ease";
-        flippedNote.position.transformStyle = "preserve-3d";
-        flippedNote.position.backgroundColor = "#3498db";
-        flippedNote.position.color = "white";
-        flippedNote.position.width = "300px";
-        flippedNote.position.height = "300px";
-        flippedNote.position.position = "relative";
-        const translatedCoordinates = this.getCenterCoordinates(flippedNote.position.width, currentNotePosition);
-
-        flippedNote.originalPosition = {
-            x: currentNotePosition.left,
-            y: currentNotePosition.top
+        const centerOfWindow = {
+            left: window.innerWidth / 2,
+            top: window.innerHeight / 2
         };
 
-        flippedNote.position.transform = `translate(${translatedCoordinates.x}px, ${translatedCoordinates.y}px) rotateY(180deg)`;
+        if (!note.centered) {
+            note.position.transition = "all 1s";
+            note.position.transformStyle = "preserve-3d";
+            note.position.backgroundColor = "#3498db";
+            note.position.color = "white";
+            note.position.width = "300px";
+            note.position.height = "300px";
+            note.position.position = "relative";
+            const offset = {
+                x: 150,
+                y: 150
+            };
+            const translatedCoordinates = this.getCoordinateTarget(centerOfWindow, offset, currentNotePosition);
 
+            note.position.transform = `translate(${translatedCoordinates.x}px, ${translatedCoordinates.y}px) rotateY(180deg)`;
+
+            note.originalPosition = {
+                left: currentNotePosition.left,
+                top: currentNotePosition.top
+            };
+            console.log(note.originalPosition);
+
+            note.centered = true;
+        } else {
+            // const target = {
+            //     left: note.originalPosition.left,
+            //     top: note.originalPosition.top
+            // };
+
+            note.position.transition = "all 1s";
+            note.position.transformStyle = "preserve-3d";
+            note.position.backgroundColor = "yellow";
+            note.position.color = "black";
+            note.position.width = "150px";
+            note.position.height = "150px";
+            note.position.position = "relative";
+            const offset = {
+                x: 35,
+                y: 35
+            };
+            console.log("original:", centerOfWindow);
+            console.log("target:", note.originalPosition);
+            const translatedCoordinates = this.getCoordinateTarget(note.originalPosition, offset, centerOfWindow);
+            console.log("movement:", translatedCoordinates);
+            // console.log(target);
+            note.position.transform = `translate(${translatedCoordinates.x}px, ${translatedCoordinates.y}px)`;
+            note.centered = false;
+        }
+        // this.setState({});
+        // setTimeout(() => null, 1000);
+        // flippedNote.position.transform = `rotateY(135deg)`;
         this.setState({});
+
     }
 
     onRemove() {

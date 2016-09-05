@@ -27,6 +27,7 @@ export default function noteReducer(state = initialState.notes, action) {
                 id: uuid.v4(),
                 text: action.note.text,
                 editMode: false,
+                centered: false,
                 position: {
                     right: randomBetween(0, window.innerWidth - 150) + "px",
                     top: randomBetween(0, window.innerHeight - 150) + "px",

@@ -3,13 +3,18 @@ import ReactDOM from "react-dom"; //eslint-disable-line no-unused-vars
 import Draggable from "react-draggable";
 import TextArea from "../common/textArea.jsx";
 
+export function setTextDirection(condition) {
+    return condition ? { transform: "rotateY(-180deg)" } : {};
+}
+
 export function renderDisplay(note, onEdit, onRemove, moveToCenter) {
+    const textDirection = setTextDirection(note.centered);
     return (
         <Draggable>
             <div className="note-container">
                 <div className="note"
                     style={Object.assign({}, note.position) }>
-                    <p>{note.text}</p>
+                    <p style={textDirection}>{note.text}</p>
                     <span>
                         <button onClick={() => moveToCenter(note.id) }
                             className="btn btn-warning glyphicon glyphicon-resize-full"/>
@@ -52,10 +57,26 @@ class Note extends React.Component {
             onExpand: props.onExpand
         };
         this.moveToCenter = this.moveToCenter.bind(this);
+        // this.onNoteTextChange = this.onNoteTextChange.bind(this);
     }
 
     componentDidUpdate() {
 
+    }
+
+    onNoteTextChange(event) {
+        // console.log("onNoteTextChange");
+        // const noteId = event.target.name;
+
+        // let changedNote = this.props.notes
+        //     .filter(note => note.id === noteId)[0];
+        // changedNote.text = event.target.value;
+
+        // let updatedNotes = [...this.props.notes];
+        // let existingNoteIndex = updatedNotes.findIndex(note => note.id === noteId);
+        // updatedNotes.splice(existingNoteIndex, 1, Object.assign({}, changedNote));
+
+        // return this.setState({});
     }
 
     moveToCenter(noteId) {
@@ -73,6 +94,7 @@ class Note extends React.Component {
         }
     }
 }
+
 Note.propTypes = {
     note: PropTypes.object.isRequired,
     onSave: PropTypes.func.isRequired,
