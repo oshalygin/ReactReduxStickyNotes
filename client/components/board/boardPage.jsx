@@ -98,9 +98,7 @@ export class BoardPage extends React.Component {
 
     onExpand(noteId, currentNotePosition) {
 
-        //This needs a lot of work....
         event.preventDefault();
-        console.log(currentNotePosition);
         let flippedNote = this.props.notes
             .filter(note => note.id === noteId)[0];
 
@@ -111,18 +109,12 @@ export class BoardPage extends React.Component {
         flippedNote.position.width = "300px";
         flippedNote.position.height = "300px";
         flippedNote.position.position = "relative";
-        // flippedNote.position.left = "-500px";
-        // flippedNote.position.transform = "transition(-50%, -50%)";
-        // flippedNote.position.top = "50%";
-        // flippedNote.position.left = "50%";
         const translatedCoordinates = this.getCenterCoordinates(flippedNote.position.width, currentNotePosition);
 
-        // flippedNote.centered = {
-        //     position: "absolute",
-        //     // width: "500px",
-        //     transform: "translate(-50%, -50%)"
-        // };
-
+        flippedNote.originalPosition = {
+            x: currentNotePosition.left,
+            y: currentNotePosition.top
+        };
 
         flippedNote.position.transform = `translate(${translatedCoordinates.x}px, ${translatedCoordinates.y}px) rotateY(180deg)`;
 
