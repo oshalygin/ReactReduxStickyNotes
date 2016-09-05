@@ -88,8 +88,6 @@ export class BoardPage extends React.Component {
         const yDifference = target.top - currentNotePosition.top;
         const xTarget = xDifference > 0 ? xDifference - offset.x : -Math.abs(xDifference) - offset.x;
         const yTarget = yDifference > 0 ? yDifference - offset.y : -Math.abs(yDifference) - offset.y;
-        // const xTarget = target.left - currentNotePosition.left - offset.x;
-        // const yTarget = target.top - currentNotePosition.top - offset.y;
 
         return {
             y: yTarget,
@@ -126,9 +124,9 @@ export class BoardPage extends React.Component {
             note.originalPosition = {
                 left: currentNotePosition.left,
                 top: currentNotePosition.top,
+                width: currentNotePosition.width,
                 movement: translatedCoordinates
             };
-            console.log(currentNotePosition);
 
             note.centered = true;
         } else {
@@ -141,13 +139,14 @@ export class BoardPage extends React.Component {
             note.position.height = "150px";
             note.position.position = "relative";
             const offset = {
-                x: 150,
-                y: 150
+                x: note.originalPosition.width,
+                y: Math.abs(note.originalPosition.width - 150) > 0
+                    ? Math.abs(note.originalPosition.width)
+                    : Math.abs(note.originalPosition.width + 150)
             };
 
             const translatedCoordinates = this.getCoordinateTarget(note.originalPosition, offset, currentNotePosition);
 
-            console.log("movement:", translatedCoordinates);
             note.position.transform = `translate(${translatedCoordinates.x}px, ${translatedCoordinates.y}px)`;
             note.centered = false;
         }
