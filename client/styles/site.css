@@ -11,7 +11,7 @@ body {
     margin: 0;
     padding: 0;
 }
-
+/*
 div.board {
     background-color: brown;
     width: 100%;
@@ -23,7 +23,7 @@ div.board {
     background: -ms-radial-gradient(center, ellipse cover, #eab92d 57%, #c79810 99%);
     background: radial-gradient(ellipse at center, #eab92d 57%, #c79810 99%);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#eab92d', endColorstr='#c79810', GradientType=1);
-}
+}*/
 
 div.note-container {
     position: fixed;

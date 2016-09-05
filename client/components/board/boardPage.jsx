@@ -1,4 +1,5 @@
 import React, { PropTypes } from "react";
+import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import uuid from "uuid";
 
@@ -86,25 +87,44 @@ export class BoardPage extends React.Component {
 
         let flippedNote = this.props.notes
             .filter(note => note.id === noteId)[0];
-        flippedNote.position.transition = "1.0s";
+
+        let documentWidth = window.innerWidth / 2;
+        let documentHeight = window.innerHeight / 2;
+        // let width = flippedNote.position.
+
+        // console.log(flippedNote.position);
+        // console.log(documentWidth);
+        // console.log(documentHeight);
+
+        // flippedNote.position.right = "50%";
+        // flippedNote.position.left = "50%";
+        // flippedNote.position.width = "50%";
+
+
+
+        // console.log(ReactDOM.findDOMNode(this).clientLeft);
+
+        flippedNote.position.transition = "all 1.0s ease";
         flippedNote.position.transformStyle = "preserve-3d";
         flippedNote.position.backgroundColor = "#3498db";
         flippedNote.position.color = "white";
-        flippedNote.position.width = "300px";
-        flippedNote.position.height = "300px";
-        flippedNote.position.position = "absolute";
-        flippedNote.position.left = "50%";
-        flippedNote.position.top = "50%";
+        // flippedNote.position.width = "300px";
+        // flippedNote.position.height = "300px";
+        flippedNote.position.position = "relative";
+        // flippedNote.position.left = "-500px";
+        // flippedNote.position.transform = "transition(-50%, -50%)";
+        // flippedNote.position.top = "50%";
+        // flippedNote.position.left = "50%";
 
 
-        flippedNote.centered = {
-            position: "absolute",
-            left: "50%",
-            top: "50%"
-        };
+        // flippedNote.centered = {
+        //     position: "absolute",
+        //     // width: "500px",
+        //     transform: "translate(-50%, -50%)"
+        // };
 
 
-        // flippedNote.position.transform = "translate(-50%, -50%) rotateY(180deg)";
+        flippedNote.position.transform = "translate(400px, 300px) rotateY(180deg)";
 
         this.setState({});
     }
@@ -116,7 +136,7 @@ export class BoardPage extends React.Component {
     render() {
         const {notes} = this.state;
         return (
-            <div className="board">
+            <div>
                 <NewNote createNote={this.addNote} />
                 {notes.map(note => {
                     return (

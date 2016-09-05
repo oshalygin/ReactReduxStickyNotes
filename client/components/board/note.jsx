@@ -3,15 +3,15 @@ import ReactDOM from "react-dom"; //eslint-disable-line no-unused-vars
 import Draggable from "react-draggable";
 import TextArea from "../common/textArea.jsx";
 
-export function renderDisplay(note, onEdit, onRemove, onExpand) {
+export function renderDisplay(note, onEdit, onRemove, moveToCenter) {
     return (
         <Draggable>
-            <div className="note-container" style={note.centered}>
+            <div className="note-container">
                 <div className="note"
                     style={Object.assign({}, note.position) }>
                     <p>{note.text}</p>
                     <span>
-                        <button onClick={() => onExpand(note.id) }
+                        <button onClick={() => moveToCenter(note.id) }
                             className="btn btn-warning glyphicon glyphicon-resize-full"/>
                         <button onClick={() => onEdit(note.id) }
                             className="btn btn-primary glyphicon glyphicon-pencil"/>
@@ -39,14 +39,40 @@ export function renderForm(note, onSave, onChange) {
 }
 
 
-const Note = ({note, onSave, onEdit, onRemove, onChange, onExpand}) => {
-    if (!!note.editMode) {
-        return renderForm(note, onSave, onChange);
-    } else { //eslint-disable-line
-        return renderDisplay(note, onEdit, onRemove, onExpand);
-    }
-};
+class Note extends React.Component {
 
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            note: props.note,
+            onSave: props.onSave,
+            onEdit: props.onEdit,
+            onChange: props.onChange,
+            onRemove: props.onRemove,
+            onExpand: props.onExpand
+        };
+        this.moveToCenter = this.moveToCenter.bind(this);
+    }
+
+    componentDidUpdate() {
+
+    }
+
+    moveToCenter(noteId) {
+        this.props.onExpand(noteId);
+        console.log(ReactDOM.findDOMNode(this).firstChild.getBoundingClientRect());
+    }
+
+    render() {
+
+        const {note, onSave, onChange, onEdit, onRemove} = this.state;
+        if (!!note.editMode) {
+            return renderForm(note, onSave, onChange);
+        } else { //eslint-disable-line
+            return renderDisplay(note, onEdit, onRemove, this.moveToCenter);
+        }
+    }
+}
 Note.propTypes = {
     note: PropTypes.object.isRequired,
     onSave: PropTypes.func.isRequired,
@@ -55,5 +81,20 @@ Note.propTypes = {
     onRemove: PropTypes.func.isRequired,
     onExpand: PropTypes.func.isRequired
 };
+
+
+// function mapStateToProps(state) {
+//     return {
+//         // notes: state.notes
+//     };
+// }
+
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         // stickyNoteActions: bindActionCreators(stickyNoteActions, dispatch)
+//     };
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Note);
 
 export default Note;
