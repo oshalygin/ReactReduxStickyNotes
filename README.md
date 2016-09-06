@@ -1,7 +1,7 @@
 # <a href='#'>React Redux Sticky Notes</a>
 
 &nbsp;&nbsp; [![Build Status](https://travis-ci.org/oshalygin/ReactReduxStickyNotes.svg?branch=master)](https://travis-ci.org/oshalygin/ReactReduxStickyNotes)
-[![Coverage Status](https://coveralls.io/repos/github/oshalygin/ReactReduxStickyNotes/badge.svg?branch=master)](https://coveralls.io/github/oshalygin/ReactReduxStickyNotes?branch=master)
+[![Coverage Status](http://coveralls.io/repos/github/oshalygin/ReactReduxStickyNotes/badge.svg?branch=master)](https://coveralls.io/github/oshalygin/ReactReduxStickyNotes?branch=master)
 
 
 
