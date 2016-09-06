@@ -2,7 +2,7 @@ import expect from "expect";
 import notesReducer from "./notesReducer";
 import * as actionTypes from "../actions/actionTypes";
 
-describe("Recipe Reducer", () => {
+describe("Note Reducer", () => {
 
     it("note reducer should set the id property to to some uuid", () => {
 
@@ -51,7 +51,7 @@ describe("Recipe Reducer", () => {
         });
     });
 
-    it("updating a recipe properly returns a different(immuatble) recipe object", () => {
+    it("updating a note properly returns a different(immuatble) note object", () => {
 
        const initialState = [
            {
