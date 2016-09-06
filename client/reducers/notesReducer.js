@@ -38,7 +38,7 @@ export default function noteReducer(state = initialState.notes, action) {
                 ...state, Object.assign({}, createdNote)
             ];
         }
-
+        case actionTypes.REPOSITIONED_NOTE_SUCCESS:
         case actionTypes.EDITING_NOTE_SUCCESS: {
                     let updatedNote = [...state];
                     let existingNoteIndex = updatedNote.findIndex(note => note.id === action.note.id);

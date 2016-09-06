@@ -22,6 +22,13 @@ export function updateNoteSuccess(note) {
     };
 }
 
+export function repositionedNoteSuccess(note) {
+    return {
+        type: actionTypes.REPOSITIONED_NOTE_SUCCESS,
+        note
+    };
+}
+
 export function editingNoteSuccess(note) {
     return {
         type: actionTypes.EDITING_NOTE_SUCCESS,
@@ -55,6 +62,13 @@ export function editingNote(note) {
         let toggledNote = Object.assign({}, note);
         toggledNote.editMode = true;
         dispatch(editingNoteSuccess(toggledNote));
+    };
+}
+
+export function repositionNote(note) {
+    return function (dispatch) {
+        const repositionedNote = Object.assign({}, note);
+        dispatch(editingNoteSuccess(repositionedNote));
     };
 }
 

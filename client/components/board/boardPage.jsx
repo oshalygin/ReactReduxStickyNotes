@@ -37,16 +37,7 @@ export class BoardPage extends React.Component {
 
     componentDidMount() {
         this.setState({ //eslint-disable-line
-            notes: this.props.notes,
-            centerNote: {
-                style: {
-                    backgroundColor: "blue",
-                    top: "50%",
-                    left: "50%",
-                    width: "500px",
-                    height: "500px"
-                }
-            }
+            notes: this.props.notes
         });
     }
 
@@ -130,14 +121,10 @@ export class BoardPage extends React.Component {
 
             note.centered = true;
         } else {
-
-            note.position.transition = "all 1s";
-            note.position.transformStyle = "preserve-3d";
             note.position.backgroundColor = "yellow";
             note.position.color = "black";
             note.position.width = "150px";
             note.position.height = "150px";
-            note.position.position = "relative";
             const offset = {
                 x: note.originalPosition.width,
                 y: Math.abs(note.originalPosition.width - 150) > 0
@@ -150,9 +137,7 @@ export class BoardPage extends React.Component {
             note.centered = false;
         }
 
-        //Persist to store
-        this.setState({});
-
+        this.props.stickyNoteActions.repositionedNoteSuccess(Object.assign({}, note));
     }
 
     onRemove() {
