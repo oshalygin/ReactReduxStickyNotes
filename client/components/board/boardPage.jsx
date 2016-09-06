@@ -140,8 +140,12 @@ export class BoardPage extends React.Component {
         this.props.stickyNoteActions.repositionedNoteSuccess(Object.assign({}, note));
     }
 
-    onRemove() {
-        console.log("onRemove");
+    onRemove(noteId) {
+        let note = this.props.notes
+            .filter(specificNote => specificNote.id === noteId)[0];
+
+        this.props.stickyNoteActions.deleteNote(Object.assign({}, note));
+
     }
 
     render() {

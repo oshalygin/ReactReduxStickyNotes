@@ -15,6 +15,13 @@ export function createdNoteSuccess(note) {
     };
 }
 
+export function deleteNoteSuccess(note) {
+    return {
+        type: actionTypes.DELETE_NOTE_SUCCESS,
+        note
+    };
+}
+
 export function updateNoteSuccess(note) {
     return {
         type: actionTypes.UPDATE_NOTE_SUCCESS,
@@ -68,7 +75,7 @@ export function editingNote(note) {
 export function repositionNote(note) {
     return function (dispatch) {
         const repositionedNote = Object.assign({}, note);
-        dispatch(editingNoteSuccess(repositionedNote));
+        dispatch(repositionedNoteSuccess(repositionedNote));
     };
 }
 
@@ -79,4 +86,10 @@ export function createNote(note) {
     };
 }
 
+export function deleteNote(note) {
+    return function (dispatch) {
+        const deletedNote = Object.assign({}, note);
+        dispatch(deleteNoteSuccess(deletedNote));
+    };
+}
 
