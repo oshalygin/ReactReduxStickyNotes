@@ -125,15 +125,7 @@ export class BoardPage extends React.Component {
             note.position.color = "black";
             note.position.width = "150px";
             note.position.height = "150px";
-            const offset = {
-                x: note.originalPosition.width,
-                y: Math.abs(note.originalPosition.width - 150) > 0
-                    ? Math.abs(note.originalPosition.width)
-                    : Math.abs(note.originalPosition.width + 150)
-            };
-            const translatedCoordinates = this.getCoordinateTarget(note.originalPosition, offset, currentNotePosition);
-
-            note.position.transform = `translate(${translatedCoordinates.x}px, ${translatedCoordinates.y}px)`;
+            note.position.transform = "";
             note.centered = false;
         }
 

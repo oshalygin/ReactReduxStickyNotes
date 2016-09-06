@@ -39,6 +39,7 @@ npm run windows-build
 * ReactJs
 * Redux
 * ES2015(ES6) JavaScript
+* ES7 Object Spread (courtesy of Babel)
 * WebPack
 * ESLint
 * PhantomJS
@@ -53,3 +54,9 @@ npm run windows-build
 * Toastr
 * Enzyme
 * Istanbul
+
+####Work needed:
+* Refactor most of the logic related to Note state to Sticky Note Actions
+* Code coverage needs to be tied into coveralls.io.  There seems to be an issue with the npm `coveralls` package.
+* A control to automatically create 10+ stickies on the page with a preselected list of tasks.
+* Remove unnecessary calls to `.setState({})` and actually persist the changes to the store.
