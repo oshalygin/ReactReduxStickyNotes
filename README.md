@@ -57,6 +57,6 @@ npm run windows-build
 
 ####Work needed:
 * Refactor most of the logic related to Note state to Sticky Note Actions
-* Code coverage needs to be tied into coveralls.io.  There seems to be an issue with the npm `coveralls` package.
 * A control to automatically create 10+ stickies on the page with a preselected list of tasks.
 * Remove unnecessary calls to `.setState({})` and actually persist the changes to the store.
+* Add more code coverage, primarily focused at the reducers.
