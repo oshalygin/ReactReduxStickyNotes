@@ -6,10 +6,11 @@ import React from "react";
 import TextArea from "./textArea.jsx";
 
 describe("<TextArea />", () => {
-
+    const onChange = function () { };
+    const props = { onChange, id: "", text: "" };
     it("There exists an textarea in the text area component", () => {
-        const onChange = function () { };
-        const props = { onChange };
+
+
 
         const wrapper = shallow(<TextArea {...props} />);
         const actual = wrapper.find("textarea").html();
@@ -17,8 +18,6 @@ describe("<TextArea />", () => {
     });
 
     it("The class for the control is 'form-control", () => {
-        const onChange = function () { };
-        const props = { onChange };
         const expected = "form-control";
         const wrapper = shallow(<TextArea {...props} />);
         const actual = wrapper.find("textarea").props().className;
