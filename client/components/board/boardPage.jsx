@@ -169,8 +169,6 @@ BoardPage.propTypes = {
     stickyNoteActions: PropTypes.object.isRequired
 };
 
-
-
 function mapStateToProps(state) {
     return {
         notes: state.notes

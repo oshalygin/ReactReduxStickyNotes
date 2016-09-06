@@ -53,7 +53,4 @@ describe("<NewNote />", () => {
         expect(actual).toEqual(expected);
 
     });
-
-
-
 });
