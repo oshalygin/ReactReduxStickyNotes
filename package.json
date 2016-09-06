@@ -13,7 +13,7 @@
     "test:watch": "npm run tests -- --watch",
     "tests": "NODE_ENV=test mocha --reporter min",
     "windows-tests": "SET NODE_ENV=test && mocha --reporter min",
-    "test": "NODE_ENV=test babel-node ./node_modules/.bin/isparta cover --include 'server/**/*.js*' --include 'client/**/*.js*' _mocha",
+    "test": "NODE_ENV=test babel-node ./node_modules/.bin/isparta cover --include 'client/**/*.js*' _mocha",
     "windows-test": "SET NODE_ENV=test && babel-node ./node_modules/isparta/bin/isparta cover --report html node_modules/mocha/bin/_mocha -- --reporter spec",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "node_modules/.bin/rimraf ./dist",
