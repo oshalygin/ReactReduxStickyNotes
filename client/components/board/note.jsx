@@ -65,7 +65,7 @@ class Note extends React.Component {
                                     className="btn btn-warning glyphicon glyphicon-resize-full"/>
                                 <button onClick={onEdit} disabled={note.centered}
                                     className="btn btn-primary glyphicon glyphicon-pencil"/>
-                                <button onClick={onRemove} disabled={note.centered}
+                                <button onClick={() => onRemove(note.id) } disabled={note.centered}
                                     className="btn btn-danger glyphicon glyphicon-trash"/>
                             </span>
                         </div>

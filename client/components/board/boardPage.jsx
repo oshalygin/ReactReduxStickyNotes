@@ -137,7 +137,6 @@ export class BoardPage extends React.Component {
             .filter(specificNote => specificNote.id === noteId)[0];
 
         this.props.stickyNoteActions.deleteNote(Object.assign({}, note));
-
     }
 
     render() {
