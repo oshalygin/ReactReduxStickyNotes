@@ -25,10 +25,6 @@ class Note extends React.Component {
         this.onEdit = this.onEdit.bind(this);
     }
 
-    componentDidUpdate() {
-
-    }
-
     componentWillReceiveProps(newProps) {
         this.setState({ note: newProps.note });
     }
