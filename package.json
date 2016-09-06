@@ -14,7 +14,7 @@
     "tests": "NODE_ENV=test mocha --reporter min",
     "windows-tests": "SET NODE_ENV=test && mocha --reporter min",
     "test": "NODE_ENV=test babel-node ./node_modules/.bin/isparta cover --include 'server/**/*.js*' --include 'client/**/*.js*' _mocha",
-    "windows-test": "SET NODE_ENV=test && isparta cover --compilers js:babel/register node_modules/mocha/bin/_mocha -i client/**/*.js --report lcovonly",
+    "windows-test": "SET NODE_ENV=test && babel-node ./node_modules/isparta/bin/isparta cover --report html node_modules/mocha/bin/_mocha -- --reporter spec",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "node_modules/.bin/rimraf ./dist",
     "build:html": "babel-node utilities/buildHtml.js",
