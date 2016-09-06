@@ -4,8 +4,8 @@
   "description": "React with Redux and Express - Sticky Notes",
   "scripts": {
     "prestart": "babel-node utilities/startingDisplayMessage.js",
-    "start": "npm-run-all --parallel open:server lint:watch",
-    "windows-start": "npm-run-all --parallel open-windows:server lint:watch",
+    "start": "npm-run-all --parallel open:server lint",
+    "windows-start": "npm-run-all --parallel open-windows:server lint",
     "open:server": "babel-watch ./server/application.js",
     "open-windows:server": "babel-node ./server/application.js",
     "lint": "./node_modules/.bin/eslint -c .eslintrc.js 'webpack.config.*' 'client/**/*.js' 'client/**/*.jsx' 'server/**/*.js' 'test' './utilities' --color",
