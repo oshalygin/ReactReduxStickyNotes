@@ -16,7 +16,8 @@ export class BoardPage extends React.Component {
             notes: [{
                 id: uuid.v4(),
                 text: "Your First Sticky!!",
-                editMode: false
+                editMode: false,
+                centered: false
             }]
 
         };
@@ -54,7 +55,6 @@ export class BoardPage extends React.Component {
     }
 
     onSave(noteId) {
-        console.log("saved");
         let updatedNote = this.props.notes
             .filter(note => note.id === noteId)[0];
         updatedNote.editMode = false;
@@ -62,7 +62,6 @@ export class BoardPage extends React.Component {
     }
 
     onNoteTextChange(event) {
-        console.log("onNoteTextChange");
         const noteId = event.target.name;
 
         let changedNote = this.props.notes
@@ -113,6 +112,7 @@ export class BoardPage extends React.Component {
             note.position.color = "white";
             note.position.width = "300px";
             note.position.height = "300px";
+            note.position.zIndex = "100";
             note.position.position = "relative";
             const offset = {
                 x: 150,
@@ -144,13 +144,13 @@ export class BoardPage extends React.Component {
                     ? Math.abs(note.originalPosition.width)
                     : Math.abs(note.originalPosition.width + 150)
             };
-
             const translatedCoordinates = this.getCoordinateTarget(note.originalPosition, offset, currentNotePosition);
 
             note.position.transform = `translate(${translatedCoordinates.x}px, ${translatedCoordinates.y}px)`;
             note.centered = false;
         }
 
+        //Persist to store
         this.setState({});
 
     }

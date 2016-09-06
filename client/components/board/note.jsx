@@ -40,18 +40,12 @@ class Note extends React.Component {
     }
 
     onEdit() {
-        console.log("onEdit");
         const {note} = this.props;
         this.props.stickyNoteActions.editingNote(Object.assign({}, note));
     }
 
-    getPosition() {
-        console.log(ReactDOM.findDOMNode(this).firstChild.getBoundingClientRect());
-    }
-
     moveToCenter(noteId) {
         const position = ReactDOM.findDOMNode(this).firstChild.getBoundingClientRect();
-        console.log(position);
         this.props.onExpand(noteId, position);
         this.setState({});
     }
