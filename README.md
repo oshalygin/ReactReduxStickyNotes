@@ -1,5 +1,7 @@
 # <a href='#'>React Redux Sticky Notes</a>
 
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ed031704cb564562ad3a9807c145ea14)](https://www.codacy.com/app/oshalygin/ReactReduxStickyNotes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=oshalygin/ReactReduxStickyNotes&amp;utm_campaign=badger)
 &nbsp;&nbsp; [![Build Status](https://travis-ci.org/oshalygin/ReactReduxStickyNotes.svg?branch=master)](https://travis-ci.org/oshalygin/ReactReduxStickyNotes)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ed031704cb564562ad3a9807c145ea14)](https://www.codacy.com/app/oshalygin/ReactReduxStickyNotes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=oshalygin/ReactReduxStickyNotes&amp;utm_campaign=Badge_Grade)
 
